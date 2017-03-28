@@ -1,17 +1,36 @@
+<style>
+html,body {
+  height: 100%;
+}
+#app {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.footer {
+  height: 3rem;
+  line-height: 3rem;
+  padding-left: 3rem;
+  background-color: #324157;
+  color: #BFCBD9;
+  margin-top: 5rem;
+}
+</style>
 <template>
   <div id="app">
     <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
       <el-menu-item index="1">双色球</el-menu-item>
       <el-menu-item index="2">敬请期待</el-menu-item>
-<!--       <el-submenu index="2">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="2-1" @click="tz">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item> -->
     </el-menu>
     <router-view></router-view>
+    <el-col>
+    <div class="footer">
+      @copyright
+    </div>
+    </el-col>
   </div>
 </template>
 
@@ -45,11 +64,3 @@
     }
   }
 </script>
-
-<style>
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-</style>
