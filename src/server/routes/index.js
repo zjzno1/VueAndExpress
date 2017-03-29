@@ -1,11 +1,19 @@
 var express = require('express');
 var router = express.Router();
+var Data = require("../schema.js");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 router.post('/getData', function(req, res, next) {
+	// db.model('datas', Data );
+
+	Data.find({},function(error,docs){
+		console.log('error',error)
+		console.log(docs)
+		
+	});
   res.json({name:'zjz'});
 });
 //当前开奖号码
