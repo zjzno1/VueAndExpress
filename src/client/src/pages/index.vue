@@ -77,7 +77,7 @@
 							</el-col>
 							<el-col>
 								<div class="card-body">
-									<el-col :span="3" v-for="item in data">
+									<el-col class="top-1" :span="3" v-for="item in data">
 										<ball :data="item"></ball>
 										<div class="num">{{item.frequency}}</div>
 									</el-col>

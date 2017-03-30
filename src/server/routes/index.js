@@ -3,9 +3,9 @@ var router = express.Router();
 var Data = require("../schema.js");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 router.post('/getData', function(req, res, next) {
 	// db.model('datas', Data );
 	Data.find(function(err,data){
@@ -45,7 +45,6 @@ router.post('/number', function(req, res, next) {
 	        }            
 	    } 
 	}
-	// res.json({num: req.body.num})
 	if(isNaN(req.body.num)||req.body.num<=0){
   			res.json({msg:"必须输入大于0的数字！"})
   		}else {
@@ -58,10 +57,7 @@ router.post('/number', function(req, res, next) {
 		  			for(var i=0;i<fontLength;i++){
 			  			for(var j=0;j<doc[i].ball.length-1;j++){
 			  				redball[doc[i].ball[j].num]+=1;
-			  				// console.log('doc[i].ball.length',i)
-			  				// console.log('doc[i].ball[j]',doc[i].ball[j])
 			  			}
-			  			// console.log('red:',redball)
 			  			blueball[doc[i].ball[6].num]+=1;
 			  		}
 			  		for(var i=1;i<redball.length;i++){
@@ -91,16 +87,32 @@ router.post('/number', function(req, res, next) {
 			  		data = data1.concat(data2);
 			  		console.log('redball',redball[1])
 			  		res.json(data)
-					// res.json(doc[0]); //返回最新一期双色球
 			})
   		}
 });
 //查询号码是否中过大奖
 router.post('/recommend', function(req, res, next) {
+	switch(req.body.value)
+	{
+	case 1:
+	  	
+	  break;
+	case 2:
+	  
+	  break;
+	default:
+	  res.json({msg: 'error,发生错误'})
+	}
   res.json({name:'zjz'});
 });
 //显示出重复的大奖号码
 router.post('/haveWin', function(req, res, next) {
-  res.json({name:'zjz'});
+	Data.find({}).sort({'date': -1}).exec(function(err,doc){
+		for(var i=0;i<doc.length;i++)
+		{
+			
+		}
+	}
+    res.json({name:'zjz'});
 });
 module.exports = router;
