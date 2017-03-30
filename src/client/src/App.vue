@@ -42,11 +42,6 @@ body {
         activeIndex2: '1'
       };
     },
-    created() {
-      this.$http.post('http://localhost:3000/getData').then((res) => {
-        console.log(res)
-      });
-    },
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);

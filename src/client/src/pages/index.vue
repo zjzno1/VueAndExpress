@@ -43,11 +43,11 @@
 	<el-row>
 		<el-col :span="15" :offset="1">
 			<el-col>
-				<div class="top">
-						<el-col :span="4">
-							<span class="title">2017034期开奖：</span>
+				<div class="top" v-if="newest!=null">
+						<el-col :span="6">
+							<span class="title">{{newest.stage}}期({{newest.date}})开奖：</span>
 						</el-col>
-						<el-col :span="1" v-for="item in data">
+						<el-col :span="1" v-for="item in newest.ball">
 							<ball :data="item"></ball>
 						</el-col>
 						<el-col :span="3" :offset="1">
@@ -59,7 +59,7 @@
 			<div class="next">
 				<el-col>
 					<el-col :span="11">
-						<el-card class="box-card">
+						<el-card class="box-card scroll">
 							<div slot="header" class="clearfix">
 							    <span style="line-height: 1rem;">出现概率查询(/次)</span>
 							</div>
@@ -70,7 +70,7 @@
 								<el-button type="primary" @click="searchOne">查询</el-button>
 							</el-col>
 							<el-col>
-								<div class="msg red">共xx期</div>
+								<div class="msg red">共{{totalNum}}期</div>
 							</el-col>
 							<el-col>
 								<div class="msg2">每个球出现的次数</div>
@@ -79,7 +79,7 @@
 								<div class="card-body">
 									<el-col :span="3" v-for="item in data">
 										<ball :data="item"></ball>
-										<div class="num">333</div>
+										<div class="num">{{item.frequency}}</div>
 									</el-col>
 								</div>
 							</el-col>
@@ -99,7 +99,7 @@
 								    </el-option>
 								</el-select>
 							</el-col>
-							<el-col class="top-1">
+							<!-- <el-col class="top-1">
 								<el-col :span="3" v-for="item in data">
 									<ball :data="item"></ball>
 								</el-col>
@@ -108,7 +108,7 @@
 								<el-col :span="3" v-for="item in data">
 									<ball :data="item"></ball>
 								</el-col>
-							</el-col>
+							</el-col> -->
 						</el-card>
 					</el-col>
 				</el-col>
@@ -154,33 +154,36 @@
 	      msg: '',
 	      inputOne: '',
 	      inputTwo: '',
+	      newest: null,
 	      value: '',
+	      totalNum: null,
+	      data: null,
 	      // data: {
 	      // 	num: 1,
 	      // 	color: 'red'
 	      // }
-	      data: [{
-	      	num: 1,
-	      	color: 'red'
-	      },{
-	      	num: 2,
-	      	color: 'red'
-	      },{
-	      	num: 3,
-	      	color: 'red'
-	      },{
-	      	num: 4,
-	      	color: 'red'
-	      },{
-	      	num: 5,
-	      	color: 'red'
-	      },{
-	      	num: 6,
-	      	color: 'red'
-	      },{
-	      	num: 7,
-	      	color: 'blue'
-	      }],
+	      // data: [{
+	      // 	num: 1,
+	      // 	color: 'red'
+	      // },{
+	      // 	num: 2,
+	      // 	color: 'red'
+	      // },{
+	      // 	num: 3,
+	      // 	color: 'red'
+	      // },{
+	      // 	num: 4,
+	      // 	color: 'red'
+	      // },{
+	      // 	num: 5,
+	      // 	color: 'red'
+	      // },{
+	      // 	num: 6,
+	      // 	color: 'red'
+	      // },{
+	      // 	num: 7,
+	      // 	color: 'blue'
+	      // }],
 	      options: [{
           value: '选项1',
           label: '黄金糕'
@@ -202,6 +205,26 @@
 	  components: {
 			ball
 		},
+	  created() {
+	  //     this.$http.post('http://localhost:3000/getData').then((res) => {
+	  //     	console.log(res.data)
+	  //     	this.$set(this.newest, res.data)
+	  //     	// this.$set('newest', res.body)
+			// // this.newest = res.body
+	  //       // newest = res.body;
+	  //       // console.log('stage',this.newest.stage)
+	  //     });
+	  	this.$http.post('http://localhost:3000/nowNum').then(function(res) {
+	  		
+	  		// this.$set('newest', res.data)
+	  		this.newest = res.data;
+	  		console.log(1,res.data)
+	  	})
+	  	this.$http.post('http://localhost:3000/getData').then(function(res) {
+	  		this.totalNum = res.data.totalNum;
+	  	})
+	      // console.log('stage',this.newest)
+	    },
 	  methods: {
 	  	onInput: function() {
 	  		if (this.msg) {
@@ -209,7 +232,11 @@
 	        }
 	  	},
 	  	searchOne: function() {
-	  		console.log(this.inputOne)
+	  		this.$http.post('http://localhost:3000/number',{num: this.inputOne}).then(function(res) {
+	  			this.data = res.data;
+		  		console.log(res.data)
+		  	})
+	  		// console.log(this.inputOne)
 	  	}
 	  }
 	}
