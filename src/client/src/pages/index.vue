@@ -64,7 +64,7 @@
 							    <span style="line-height: 1rem;">出现概率查询(/次)</span>
 							</div>
 							<el-col :span="18">
-								<el-input v-model="inputOne" placeholder="近x次内各个球出现的次数"></el-input>
+								<el-input v-model="inputOne" placeholder="近x期内各个球出现的次数"></el-input>
 							</el-col>
 							<el-col :span="4" :offset="2">
 								<el-button type="primary" @click="searchOne">查询</el-button>
@@ -122,7 +122,7 @@
 								<el-input v-model="inputTwo" placeholder="查询是否中过大奖"></el-input>
 							</el-col>
 							<el-col :span="4" :offset="2">
-								<el-button type="primary">查询</el-button>
+								<el-button type="primary" @click="searchTwo">查询</el-button>
 							</el-col>
 						</el-card>
 					</el-col>
@@ -206,25 +206,17 @@
 			ball
 		},
 	  created() {
-	  //     this.$http.post('http://localhost:3000/getData').then((res) => {
-	  //     	console.log(res.data)
-	  //     	this.$set(this.newest, res.data)
-	  //     	// this.$set('newest', res.body)
-			// // this.newest = res.body
-	  //       // newest = res.body;
-	  //       // console.log('stage',this.newest.stage)
-	  //     });
 	  	this.$http.post('http://localhost:3000/nowNum').then(function(res) {
-	  		
-	  		// this.$set('newest', res.data)
 	  		this.newest = res.data;
 	  		console.log(1,res.data)
 	  	})
 	  	this.$http.post('http://localhost:3000/getData').then(function(res) {
 	  		this.totalNum = res.data.totalNum;
 	  	})
-	      // console.log('stage',this.newest)
-	    },
+	  	this.$http.post('http://localhost:3000/haveWin').then(function(res) {
+	  		console.log(111,res.data.data)
+	  	})
+	  },
 	  methods: {
 	  	onInput: function() {
 	  		if (this.msg) {
@@ -236,7 +228,12 @@
 	  			this.data = res.data;
 		  		console.log(res.data)
 		  	})
-	  		// console.log(this.inputOne)
+	  	},
+	  	searchTwo: function() {
+	  		this.$http.post('http://localhost:3000/search',{value: this.inputTwo}).then(function(res) {
+	  			this.data = res.data;
+		  		console.log(222,res.data.data)
+		  	})
 	  	}
 	  }
 	}
