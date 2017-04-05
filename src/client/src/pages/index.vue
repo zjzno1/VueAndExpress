@@ -158,32 +158,6 @@
 	      value: '',
 	      totalNum: null,
 	      data: null,
-	      // data: {
-	      // 	num: 1,
-	      // 	color: 'red'
-	      // }
-	      // data: [{
-	      // 	num: 1,
-	      // 	color: 'red'
-	      // },{
-	      // 	num: 2,
-	      // 	color: 'red'
-	      // },{
-	      // 	num: 3,
-	      // 	color: 'red'
-	      // },{
-	      // 	num: 4,
-	      // 	color: 'red'
-	      // },{
-	      // 	num: 5,
-	      // 	color: 'red'
-	      // },{
-	      // 	num: 6,
-	      // 	color: 'red'
-	      // },{
-	      // 	num: 7,
-	      // 	color: 'blue'
-	      // }],
 	      options: [{
           value: '选项1',
           label: '黄金糕'
