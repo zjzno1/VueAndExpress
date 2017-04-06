@@ -184,4 +184,8 @@ router.post('/haveWin', function(req, res, next) {
 	// 	res.json({data: data})
 	// });
 });
+//历史中奖
+router.post('/history', function(req, res, next) {
+
+});
 module.exports = router;

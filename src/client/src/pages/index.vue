@@ -148,6 +148,7 @@
 </template>
 <script>
 	import ball from '../components/ball'
+	var url = require('../../config.js')
 	export default {
 	  data() {
 	    return {
@@ -159,20 +160,20 @@
 	      totalNum: null,
 	      data: null,
 	      options: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: '1',
+          label: '出现频率最高的球'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: '2',
+          label: '出现频率最低的球'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: '3',
+          label: '近100期出现频率最高的球'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: '4',
+          label: '近100期出现频率最低的球'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: '5',
+          label: '条件概率计算得出的球'
         }]
 	    }
 	  },
@@ -180,14 +181,14 @@
 			ball
 		},
 	  created() {
-	  	this.$http.post('http://localhost:3000/nowNum').then(function(res) {
+	  	this.$http.post(url.URL+'nowNum').then(function(res) {
 	  		this.newest = res.data;
 	  		console.log(1,res.data)
 	  	})
-	  	this.$http.post('http://localhost:3000/getData').then(function(res) {
+	  	this.$http.post(url.URL+'getData').then(function(res) {
 	  		this.totalNum = res.data.totalNum;
 	  	})
-	  	this.$http.post('http://localhost:3000/haveWin').then(function(res) {
+	  	this.$http.post(url.URL+'haveWin').then(function(res) {
 	  		console.log(111,res.data.data)
 	  	})
 	  },
@@ -198,13 +199,13 @@
 	        }
 	  	},
 	  	searchOne: function() {
-	  		this.$http.post('http://localhost:3000/number',{num: this.inputOne}).then(function(res) {
+	  		this.$http.post(url.URL+'number',{num: this.inputOne}).then(function(res) {
 	  			this.data = res.data;
-		  		console.log(res.data)
+		  		console.log(res.data.msg)
 		  	})
 	  	},
 	  	searchTwo: function() {
-	  		this.$http.post('http://localhost:3000/search',{value: this.inputTwo}).then(function(res) {
+	  		this.$http.post(url.URL+'search',{value: this.inputTwo}).then(function(res) {
 	  			this.data = res.data;
 		  		console.log(222,res.data.data)
 		  	})
