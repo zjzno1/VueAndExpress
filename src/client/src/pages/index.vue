@@ -148,7 +148,7 @@
 </template>
 <script>
 	import ball from '../components/ball'
-	var url = require('../../config.js')
+	var url = require('../../setting.js')
 	export default {
 	  data() {
 	    return {
